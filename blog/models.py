@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from django.db.models import CheckConstraint
+from django.db.models import CheckConstraint
 
 STATUS =(
     (0,"Draft"),
@@ -9,7 +9,7 @@ STATUS =(
 
 
 class Post(models.Model):
-    id = models.AutoField(primary_key=True)
+    Primary_key = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique = True)
     author = models.ForeignKey(User, on_delete = models.CASCADE, related_name = 'blog_posts')
@@ -35,3 +35,8 @@ class mat_and_content(models.Model):
     Material = models.TextField()
     Quantity = models.IntegerField()
     Mat_and_cont_Key = models.ForeignKey(Post, on_delete=models.CASCADE )
+    class Meta:
+        constraints = [
+            CheckConstraint(check=models.Q(Quantity__gte=0), name='non_negative')
+        ]
+    

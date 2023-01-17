@@ -6,10 +6,9 @@
       <div class="card-body">
         <h1>{% block title %} {{ object.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{ post.author }} | {{ post.created_on }}</p>
-        {%for steps in steps_list %}
-        <p class="card-text ">{{steps.step_number}}|{{steps.step_desc}}|{{steps.image}}</p>
+        {%for step in steps%}
+        <p> {{step.step_number}}</p>
         {%endfor%}
-        {% comment %} <p class="card-text ">{{ object.content | safe }}</p> {% endcomment %}
       </div>
     </div>
     {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
